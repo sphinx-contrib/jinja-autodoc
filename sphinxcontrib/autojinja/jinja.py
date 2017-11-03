@@ -9,11 +9,7 @@
 
 import re
 import os
-try:
-    import cStringIO as StringIO
-except ImportError:
-    import StringIO
-
+import sys
 from docutils import nodes
 from docutils.statemachine import ViewList
 
@@ -24,6 +20,10 @@ from sphinx.util.docstrings import prepare_docstring
 from sphinx.pycode import ModuleAnalyzer
 
 from sphinxcontrib import jinjadomain
+
+PY3 = sys.version_info[0] > 2
+if PY3:
+    basestring = str
 
 
 def jinja_directive(path, content):

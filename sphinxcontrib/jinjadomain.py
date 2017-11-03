@@ -67,8 +67,8 @@ class JinjaIndex(Index):
     def generate(self, docnames=None):
         content = {}
         items = ((method, path, info)
-            for method, routes in self.domain.routes.iteritems()
-            for path, info in routes.iteritems())
+            for method, routes in self.domain.routes.items()
+            for path, info in routes.items())
         items = sorted(items, key=lambda item: item[1])
         for method, path, info in items:
             entries = content.setdefault(self.grouping_prefix(path), [])
@@ -77,7 +77,7 @@ class JinjaIndex(Index):
                 jinja_resource_anchor(method, path), '', '', info[1]
             ])
         content = content.items()
-        content.sort(key=lambda (k, v): k)
+        content.sort(key=lambda k: k[0])
         return (content, True)
 
 class JinjaDomain(Domain):
@@ -105,14 +105,14 @@ class JinjaDomain(Domain):
         return dict((key, self.data[key]) for key in self.object_types)
 
     def clear_doc(self, docname):
-        for typ, routes in self.routes.iteritems():
+        for typ, routes in self.routes.items():
             for path, info in routes.items():
                 if info[0] == docname:
                     del routes[path]
 
     def get_objects(self):
-        for method, routes in self.routes.iteritems():
-            for path, info in routes.iteritems():
+        for method, routes in self.routes.items():
+            for path, info in routes.items():
                 anchor = jinja_resource_anchor(method, path)
                 yield (path, path, method, info[0], anchor, 1)
 
