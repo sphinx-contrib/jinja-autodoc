@@ -84,10 +84,9 @@ class AutojinjaDirective(Directive):
         docstring=parse_jinja_comment(
             os.path.join(env.config['jinja_template_path'],path))
         docstring = prepare_docstring(docstring)
-        if docstring is not None:
-            if env.config['jinja_template_path']:
-                for line in jinja_directive(path, docstring):
-                    yield line
+        if docstring is not None and env.config['jinja_template_path']:
+            for line in jinja_directive(path, docstring):
+                yield line
 
         yield ''
 
