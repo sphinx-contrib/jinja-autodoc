@@ -9,4 +9,3 @@
     :license: BSD, see LICENSE for details.
 
 """
-

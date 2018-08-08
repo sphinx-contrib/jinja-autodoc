@@ -29,12 +29,13 @@ if PY3:
 def jinja_directive(path, content):
     if isinstance(content, basestring):
         content = content.splitlines()
-    yield ''
-    yield '.. jinja:template:: {path}'.format(**locals())
-    yield ''
+    yield ""
+    yield ".. jinja:template:: {path}".format(**locals())
+    yield ""
     for line in content:
-        yield '   ' + line
-    yield ''
+        yield "   " + line
+    yield ""
+
 
 def parse_jinja_comment(path):
     """
@@ -47,13 +48,14 @@ def parse_jinja_comment(path):
     :rtype: str
     """
 
-    f= open(path, 'r')
-    contents= f.read()
-    res=re.match(r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE|re.DOTALL)
+    f = open(path, "r")
+    contents = f.read()
+    res = re.match(r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE | re.DOTALL)
     if res:
         return res.group(1)
 
     return None
+
 
 class AutojinjaDirective(Directive):
 
@@ -64,7 +66,7 @@ class AutojinjaDirective(Directive):
     @property
     def endpoints(self):
         try:
-            endpoints = re.split(r'\s*,\s*', self.options['endpoints'])
+            endpoints = re.split(r"\s*,\s*", self.options["endpoints"])
         except KeyError:
             # means 'endpoints' option was missing
             return None
@@ -73,7 +75,7 @@ class AutojinjaDirective(Directive):
     @property
     def undoc_endpoints(self):
         try:
-            endpoints = re.split(r'\s*,\s*', self.options['undoc-endpoints'])
+            endpoints = re.split(r"\s*,\s*", self.options["undoc-endpoints"])
         except KeyError:
             return frozenset()
         return frozenset(endpoints)
@@ -81,27 +83,28 @@ class AutojinjaDirective(Directive):
     def make_rst(self):
         env = self.state.document.settings.env
         path = self.arguments[0]
-        docstring=parse_jinja_comment(
-            os.path.join(env.config['jinja_template_path'],path))
+        docstring = parse_jinja_comment(
+            os.path.join(env.config["jinja_template_path"], path)
+        )
         docstring = prepare_docstring(docstring)
-        if docstring is not None and env.config['jinja_template_path']:
+        if docstring is not None and env.config["jinja_template_path"]:
             for line in jinja_directive(path, docstring):
                 yield line
 
-        yield ''
+        yield ""
 
     def run(self):
         node = nodes.section()
         node.document = self.state.document
         result = ViewList()
         for line in self.make_rst():
-            result.append(line, '<autojinja>')
+            result.append(line, "<autojinja>")
         nested_parse_with_titles(self.state, result, node)
         return node.children
 
 
 def setup(app):
-    if not app.registry.has_domain('jinja'):
+    if not app.registry.has_domain("jinja"):
         jinjadomain.setup(app)
-    app.add_directive('autojinja', AutojinjaDirective)
+    app.add_directive("autojinja", AutojinjaDirective)
     app.add_config_value("jinja_template_path", "", None)
