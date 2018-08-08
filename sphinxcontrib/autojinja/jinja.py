@@ -49,7 +49,7 @@ def parse_jinja_comment(path):
 
     f= open(path, 'r')
     contents= f.read()
-    res=re.match(r"\{\#(.+?)\#\}", contents, flags=re.MULTILINE|re.DOTALL)
+    res=re.match(r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE|re.DOTALL)
     if res:
         return res.group(1)
 
@@ -84,7 +84,7 @@ class AutojinjaDirective(Directive):
         docstring=parse_jinja_comment(
             os.path.join(env.config['jinja_template_path'],path))
         docstring = prepare_docstring(docstring)
-        if env.config['jinja_template_path']:
+        if docstring is not None and env.config['jinja_template_path']:
             for line in jinja_directive(path, docstring):
                 yield line
 
