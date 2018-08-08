@@ -15,7 +15,7 @@ import os
 from sphinx import addnodes
 from sphinx.domains import Domain, ObjType, Index
 from sphinx.directives import ObjectDescription
-from sphinx.util.docfields import GroupedField, TypedField
+from sphinx.util.docfields import TypedField
 
 
 def jinja_resource_anchor(method, path):
@@ -82,7 +82,15 @@ class JinjaIndex(Index):
         for method, path, info in items:
             entries = content.setdefault(self.grouping_prefix(path), [])
             entries.append(
-                [path, 0, info[0], jinja_resource_anchor(method, path), "", "", info[1]]
+                [
+                    path,
+                    0,
+                    info[0],
+                    jinja_resource_anchor(method, path),
+                    "",
+                    "",
+                    info[1],
+                ]
             )
         content = content.items()
         content.sort(key=lambda k: k[0])

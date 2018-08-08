@@ -13,11 +13,13 @@ import sys
 from docutils import nodes
 from docutils.statemachine import ViewList
 
-from sphinx.util import force_decode
-from sphinx.util.compat import Directive
+try:
+    from docutils.parsers.rst import Directive
+except ImportError:
+    from sphinx.util.compat import Directive
+
 from sphinx.util.nodes import nested_parse_with_titles
 from sphinx.util.docstrings import prepare_docstring
-from sphinx.pycode import ModuleAnalyzer
 
 from sphinxcontrib import jinjadomain
 
@@ -50,7 +52,9 @@ def parse_jinja_comment(path):
 
     f = open(path, "r")
     contents = f.read()
-    res = re.match(r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE | re.DOTALL)
+    res = re.match(
+        r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE | re.DOTALL
+    )
     if res:
         return res.group(1)
 
