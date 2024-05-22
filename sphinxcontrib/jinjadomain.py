@@ -117,13 +117,13 @@ class JinjaDomain(Domain):
 
     def clear_doc(self, docname):
         for typ, routes in self.routes.items():
-            for path, info in routes.items():
+            for path, info in list(routes.items()):
                 if info[0] == docname:
                     del routes[path]
 
     def get_objects(self):
         for method, routes in self.routes.items():
-            for path, info in routes.items():
+            for path, info in list(routes.items()):
                 anchor = jinja_resource_anchor(method, path)
                 yield (path, path, method, info[0], anchor, 1)
 
