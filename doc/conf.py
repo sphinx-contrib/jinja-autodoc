@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #
 # sphinxcontrib-httpdomain documentation build configuration file, created by
 # sphinx-quickstart on Thu Jun  2 13:27:52 2011.
@@ -43,8 +42,8 @@ source_suffix = ".rst"
 master_doc = "index"
 
 # General information about the project.
-project = u"sphinxcontrib-jinjadomain"
-copyright = u"2012, Jaka Hudoklin"
+project = "sphinxcontrib-jinjadomain"
+copyright = "2012, Jaka Hudoklin"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -186,8 +185,8 @@ latex_documents = [
     (
         "index",
         "sphinxcontrib-jinjadomain.tex",
-        u"sphinxcontrib-jinjadomain Documentation",
-        u"Jaka Hudoklin",
+        "sphinxcontrib-jinjadomain Documentation",
+        "Jaka Hudoklin",
         "manual",
     )
 ]
@@ -224,8 +223,8 @@ man_pages = [
     (
         "index",
         "sphinxcontrib-jinjadomain",
-        u"sphinxcontrib-jinjadomain Documentation",
-        [u"Jaka Hudoklin"],
+        "sphinxcontrib-jinjadomain Documentation",
+        ["Jaka Hudoklin"],
         1,
     )
 ]
@@ -243,8 +242,8 @@ texinfo_documents = [
     (
         "index",
         "sphinxcontrib-jinjadomain",
-        u"sphinxcontrib-jinjadomain Documentation",
-        u"Jaka Hudoklin",
+        "sphinxcontrib-jinjadomain Documentation",
+        "Jaka Hudoklin",
         "sphinxcontrib-jinjadomain",
         "One line description of project.",
         "Miscellaneous",

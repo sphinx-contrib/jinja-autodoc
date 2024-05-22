@@ -1,15 +1,16 @@
 """
-    sphinxcontrib.autojinja
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+sphinxcontrib.autojinja
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    :copyright: Copyright 2012 by Jaka Hudoklin
-    :license: BSD, see LICENSE for details.
+:copyright: Copyright 2012 by Jaka Hudoklin
+:license: BSD, see LICENSE for details.
 
 """
 
-import re
 import os
+import re
 import sys
+
 from docutils import nodes
 from docutils.statemachine import ViewList
 
@@ -18,8 +19,8 @@ try:
 except ImportError:
     from sphinx.util.compat import Directive
 
-from sphinx.util.nodes import nested_parse_with_titles
 from sphinx.util.docstrings import prepare_docstring
+from sphinx.util.nodes import nested_parse_with_titles
 
 from sphinxcontrib import jinjadomain
 
@@ -40,21 +41,17 @@ def jinja_directive(path, content):
 
 
 def parse_jinja_comment(path):
-    """
-    Parses jinja comment
+    """Parses jinja comment.
 
     :param path: Path to jinja template
     :type path: str
-
     :returns: Jinja comment docstring
     :rtype: str
     """
 
-    f = open(path, "r")
+    f = open(path)
     contents = f.read()
-    res = re.match(
-        r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE | re.DOTALL
-    )
+    res = re.match(r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE | re.DOTALL)
     if res:
         return res.group(1)
 
@@ -62,7 +59,6 @@ def parse_jinja_comment(path):
 
 
 class AutojinjaDirective(Directive):
-
     has_content = True
     required_arguments = 1
     option_spec = {}
@@ -92,8 +88,7 @@ class AutojinjaDirective(Directive):
         )
         docstring = prepare_docstring(docstring)
         if docstring is not None and env.config["jinja_template_path"]:
-            for line in jinja_directive(path, docstring):
-                yield line
+            yield from jinja_directive(path, docstring)
 
         yield ""
 

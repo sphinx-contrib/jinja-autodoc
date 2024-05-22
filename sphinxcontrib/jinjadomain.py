@@ -1,20 +1,22 @@
 """
-    sphinxcontrib.jinjadomain
-    ~~~~~~~~~~~~~~~~~~~~~~~~
+sphinxcontrib.jinjadomain
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-    The jinja domain for documenting jinja templates.
+The jinja domain for documenting jinja templates.
 
-    :copyright: Copyright 2012 by Jaka Hudoklin
-    :license: BSD, see LICENSE for details.
+:copyright: Copyright 2012 by Jaka Hudoklin
+:license: BSD, see LICENSE for details.
 
 """
 
-import re
 import os
+import re
 
 from sphinx import addnodes
-from sphinx.domains import Domain, ObjType, Index
 from sphinx.directives import ObjectDescription
+from sphinx.domains import Domain
+from sphinx.domains import Index
+from sphinx.domains import ObjType
 from sphinx.util.docfields import TypedField
 
 
@@ -24,7 +26,6 @@ def jinja_resource_anchor(method, path):
 
 
 class JinjaResource(ObjectDescription):
-
     doc_field_types = [
         TypedField(
             "parameter",
@@ -60,13 +61,12 @@ class JinjaResource(ObjectDescription):
 
 
 class JinjaIndex(Index):
-
     name = "jinjatemplates"
     localname = "templates"
     shortname = "templates"
 
     def __init__(self, *args, **kwargs):
-        super(JinjaIndex, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
     def grouping_prefix(self, path):
         return os.path.split(path)[0]

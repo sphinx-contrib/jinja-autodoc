@@ -64,19 +64,19 @@ nicely:
 
 .. module:: sphinxcontrib.autojinja.jinja
 
-:mod:`sphinxcontrib.autojinja.jinja` --- Creates jinja 
+:mod:`sphinxcontrib.autojinja.jinja` --- Creates jinja
 ------------------------------------------------------------------------------
 
 It generates jinja reference documentation from a start comment in jinja template.
 Basicly it just takes `docstring` betwene `{#` and `#}` and inserts it where you
-specified `autojinja` directive. 
+specified `autojinja` directive.
 
 In order to use it, add :mod:`sphinxcontrib.autojinja.jinja` into
 :data:`extensions` list of your Sphinx configuration (:file:`conf.py`) file::
 
     extensions = ['sphinxcontrib.autojinja.jinja']
 
-To make everything work you also have to specify relative or absolute path 
+To make everything work you also have to specify relative or absolute path
 to your templates. If this option is not specified templates won't be displayed
 in your documentation.
 You can do this by setting `jinja_template_path` in your Sphinx configuration
@@ -113,4 +113,3 @@ This package is also avalible on PyPI as `sphinxcontrib-jinjadomain`
 
 .. _Jaka Hudoklin: http://www.offlinehacker.net/
 __ https://github.com/offlinehacker/sphinxcontrib.jinjadomain
-
