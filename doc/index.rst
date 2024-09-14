@@ -68,7 +68,7 @@ nicely:
 ------------------------------------------------------------------------------
 
 It generates jinja reference documentation from a start comment in jinja template.
-Basicly it just takes `docstring` betwene `{#` and `#}` and inserts it where you
+Basicly it just takes `docstring` between `{#` and `#}` and inserts it where you
 specified `autojinja` directive. 
 
 In order to use it, add :mod:`sphinxcontrib.autojinja.jinja` into
