@@ -35,6 +35,9 @@ intersphinx_mapping = {
 # -- Options for HTML output ----------------------------------------------
 
 html_theme = "shibuya"
+html_theme_options = {
+    "page_layout": "compact",
+}
 htmlhelp_basename = "sphinxcontrib-jinjadomaindoc"
 
 jinja_template_path = "doc/"

@@ -11,7 +11,6 @@ In order to use it, add :mod:`sphinxcontrib.jinjadomain` into
 
     extensions = ['sphinxcontrib.jinjadomain']
 
-
 Basic usage
 -----------
 
@@ -31,14 +30,14 @@ jinja templates.
 
 will be rendered as:
 
-   .. jinja:template:: /etc/network/interfaces
+.. jinja:template:: /etc/network/interfaces
 
-      Template for network config
+  Template for network config
 
-      :param hostname: your computer's hostname
-      :type hostname: str
-      :param ip: your computer's ip
-      :type ip: str
+  :param hostname: your computer's hostname
+  :type hostname: str
+  :param ip: your computer's ip
+  :type ip: str
 
 .. _directives:
 
@@ -64,10 +63,10 @@ nicely:
 
 .. module:: sphinxcontrib.autojinja.jinja
 
-:mod:`sphinxcontrib.autojinja.jinja` --- Creates jinja
-------------------------------------------------------------------------------
+Automatically documenting jinja templates
+=========================================
 
-It generates jinja reference documentation from a start comment in jinja template.
+The :mod:`sphinxcontrib.autojinja.jinja` extension generates jinja reference documentation from a start comment in jinja template.
 Basicly it just takes `docstring` between `{#` and `#}` and inserts it where you
 specified `autojinja` directive.
 
@@ -82,9 +81,16 @@ in your documentation.
 You can do this by setting `jinja_template_path` in your Sphinx configuration
 (:file:`conf.py`) file.
 
-For example:
+For example, considering this template:
+
+.. literalinclude :: sample_template.in
+   :language: jinja
+   :caption: sample_template.in
+
+the following documentation:
 
 .. sourcecode:: rst
+   :caption: templates_doc.rst
 
    .. autojinja: sample_template.in
 
@@ -96,8 +102,8 @@ Author and License
 ------------------
 
 The :mod:`sphinxcontrib.jinjadomain` and :mod:`sphinxcontrib.autojinja`,
-parts of :mod:`sphinxcontrib`, are written by `Jaka Hudoklin`_
-and distributed under BSD license.
+parts of :mod:`sphinxcontrib`, are written by `Jaka Hudoklin`_ and maintained
+by `Yaal Coop`_ and distributed under BSD license.
 
 The source code is mantained under `the common repository of contributed
 extensions for Sphinx`__ (find the :file:`jinjadomain` directory inside
@@ -112,4 +118,5 @@ the repository).
 This package is also avalible on PyPI as `sphinxcontrib-jinjadomain`
 
 .. _Jaka Hudoklin: http://www.offlinehacker.net/
+.. _Yaal Coop: https://yaal.coop
 __ https://github.com/offlinehacker/sphinxcontrib.jinjadomain
