@@ -1,4 +1,0 @@
-nose
-flake8
-yamllint
-coverage
