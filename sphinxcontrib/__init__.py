@@ -1,6 +1,4 @@
-"""
-sphinxcontrib
-~~~~~~~~~~~~~
+"""sphinxcontrib.
 
 This package is a namespace package that contains all extensions
 distributed in the ``sphinx-contrib`` distribution.

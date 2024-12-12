@@ -1,12 +1,9 @@
-"""
-sphinxcontrib.jinjadomain
-~~~~~~~~~~~~~~~~~~~~~~~~
+"""sphinxcontrib.jinjadomain.
 
 The jinja domain for documenting jinja templates.
 
 :copyright: Copyright 2012 by Jaka Hudoklin
 :license: BSD, see LICENSE for details.
-
 """
 
 import os
@@ -116,7 +113,7 @@ class JinjaDomain(Domain):
         return dict((key, self.data[key]) for key in self.object_types)
 
     def clear_doc(self, docname):
-        for typ, routes in self.routes.items():
+        for routes in self.routes.values():
             for path, info in list(routes.items()):
                 if info[0] == docname:
                     del routes[path]

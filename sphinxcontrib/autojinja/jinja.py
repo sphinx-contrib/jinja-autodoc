@@ -1,10 +1,7 @@
-"""
-sphinxcontrib.autojinja
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""sphinxcontrib.autojinja.
 
 :copyright: Copyright 2012 by Jaka Hudoklin
 :license: BSD, see LICENSE for details.
-
 """
 
 import os
@@ -41,14 +38,13 @@ def jinja_directive(path, content):
 
 
 def parse_jinja_comment(path):
-    """Parses jinja comment.
+    """Parse jinja comment.
 
     :param path: Path to jinja template
     :type path: str
     :returns: Jinja comment docstring
     :rtype: str
     """
-
     f = open(path)
     contents = f.read()
     res = re.match(r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE | re.DOTALL)
