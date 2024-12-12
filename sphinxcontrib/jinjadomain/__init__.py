@@ -16,6 +16,8 @@ from sphinx.domains import Index
 from sphinx.domains import ObjType
 from sphinx.util.docfields import TypedField
 
+__version__ = "0.0.2"
+
 
 def jinja_resource_anchor(method, path):
     path = re.sub(r"[<>:/]", "-", path)

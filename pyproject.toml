@@ -31,6 +31,17 @@ dependencies = [
     "sphinx>=1.0.0",
 ]
 
+[dependency-groups]
+dev = [
+    "pre-commit-uv>=4.1.4",
+    "tox-uv>=1.16.0",
+]
+
+doc = [
+    "shibuya>=2024.10.15",
+    "sphinx>=7.0.0",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["sphinxcontrib.jinjadomain"]
 
@@ -61,5 +72,33 @@ ignore = [
 [tool.ruff.lint.isort]
 force-single-line = true
 
-[too.ruff.format]
+[tool.ruff.format]
 docstring-code-format = true
+
+[tool.tox]
+requires = ["tox>=4.19"]
+env_list = [
+    "style",
+    "doc",
+]
+
+[tool.tox.env_run_base]
+runner = "uv-venv-lock-runner"
+dependency_groups = ["dev"]
+commands = [
+    ["pytest", "--showlocals", "--full-trace", "{posargs}"],
+]
+
+[tool.tox.env.style]
+skip_install = true
+runner = "uv-venv-runner"
+commands = [
+    ["pre-commit", "run", "--all-files", "--show-diff-on-failure"],
+]
+
+[tool.tox.env.doc]
+dependency_groups = ["doc"]
+commands = [
+    ["sphinx-build", "--builder", "html", "doc", "build/sphinx/html"],
+    ["sphinx-build", "--builder", "man", "doc", "build/sphinx/html"],
+]

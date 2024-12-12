@@ -1,7 +1,7 @@
 .. module:: sphinxcontrib.jinjadomain
 
-:mod:`sphinxcontrib.jinjadomain` --- Documenting jinja templates
-=================================================================
+Documenting jinja templates
+===========================
 
 This contrib extension, :mod:`sphinxcontrib.jinjadomain`, provides a Sphinx
 domain for describing jinja templates.
