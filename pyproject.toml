@@ -43,7 +43,10 @@ doc = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["sphinxcontrib.jinja"]
+packages = [
+    "sphinxcontrib/jinja",
+    "sphinxcontrib/autojinja",
+]
 
 [tool.ruff.lint]
 select = [
