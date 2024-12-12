@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "sphinxcontrib-jinja"
+name = "sphinxcontrib.jinja"
 version = "0.6.0"
 description = "Jinja domain for jinja templates"
 readme = "README.md"
@@ -43,10 +43,7 @@ doc = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = [
-    "sphinxcontrib/jinja",
-    "sphinxcontrib/autojinja",
-]
+only-include = ["sphinxcontrib"]
 
 [tool.ruff.lint]
 select = [
@@ -102,6 +99,5 @@ commands = [
 [tool.tox.env.doc]
 dependency_groups = ["doc"]
 commands = [
-    ["sphinx-build", "--builder", "html", "doc", "build/sphinx/html"],
-    ["sphinx-build", "--builder", "man", "doc", "build/sphinx/html"],
+    ["sphinx-build", "--builder", "html", "--write-all", "--nitpicky", "--fail-on-warning", "doc", "build/sphinx/html"],
 ]

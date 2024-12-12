@@ -99,7 +99,7 @@ will be rendered as:
     .. autojinja:: sample_template.in
 
 Author and License
-------------------
+==================
 
 The :mod:`sphinxcontrib.jinja` and :mod:`sphinxcontrib.autojinja`,
 parts of :mod:`sphinxcontrib`, was originally written by `Jaka Hudoklin`_,

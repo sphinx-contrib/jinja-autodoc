@@ -62,9 +62,6 @@ class JinjaIndex(Index):
     localname = "templates"
     shortname = "templates"
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
     def grouping_prefix(self, path):
         return os.path.split(path)[0]
 
