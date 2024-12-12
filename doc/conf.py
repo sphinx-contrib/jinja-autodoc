@@ -6,7 +6,7 @@ sys.path.insert(0, os.path.abspath(".."))
 sys.path.insert(0, os.path.abspath("../sphinxcontrib"))
 
 extensions = [
-    "sphinxcontrib.jinjadomain",
+    "sphinxcontrib.jinja",
     "sphinxcontrib.autojinja.jinja",
     "sphinx.ext.autodoc",
     "sphinx.ext.autosectionlabel",
@@ -19,7 +19,7 @@ extensions = [
 templates_path = ["_templates"]
 source_suffix = {".rst": "restructuredtext"}
 master_doc = "index"
-project = "sphinxcontrib-jinjadomain"
+project = "sphinxcontrib-jinja"
 year = datetime.datetime.now().strftime("%Y")
 copyright = f"{year}, Jaka Hudoklin"
 version = "0.6"
@@ -38,6 +38,6 @@ html_theme = "shibuya"
 html_theme_options = {
     "page_layout": "compact",
 }
-htmlhelp_basename = "sphinxcontrib-jinjadomaindoc"
+htmlhelp_basename = "sphinxcontrib-jinjadoc"
 
 jinja_template_path = "doc/"

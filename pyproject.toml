@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "sphinxcontrib-jinjadomain"
+name = "sphinxcontrib-jinja"
 version = "0.6.0"
 description = "Jinja domain for jinja templates"
 readme = "README.md"
@@ -43,7 +43,7 @@ doc = [
 ]
 
 [tool.hatch.build.targets.wheel]
-packages = ["sphinxcontrib.jinjadomain"]
+packages = ["sphinxcontrib.jinja"]
 
 [tool.ruff.lint]
 select = [

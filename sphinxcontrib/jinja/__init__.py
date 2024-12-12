@@ -1,4 +1,4 @@
-"""sphinxcontrib.jinjadomain.
+"""sphinxcontrib.jinja.
 
 The jinja domain for documenting jinja templates.
 

@@ -6,7 +6,6 @@
 
 import os
 import re
-import sys
 
 from docutils import nodes
 from docutils.statemachine import ViewList
@@ -19,15 +18,11 @@ except ImportError:
 from sphinx.util.docstrings import prepare_docstring
 from sphinx.util.nodes import nested_parse_with_titles
 
-from sphinxcontrib import jinjadomain
-
-PY3 = sys.version_info[0] > 2
-if PY3:
-    basestring = str
+from sphinxcontrib import jinja
 
 
 def jinja_directive(path, content):
-    if isinstance(content, basestring):
+    if isinstance(content, str):
         content = content.splitlines()
     yield ""
     yield ".. jinja:template:: {path}".format(**locals())
@@ -100,6 +95,6 @@ class AutojinjaDirective(Directive):
 
 def setup(app):
     if not app.registry.has_domain("jinja"):
-        jinjadomain.setup(app)
+        jinja.setup(app)
     app.add_directive("autojinja", AutojinjaDirective)
     app.add_config_value("jinja_template_path", "", None)

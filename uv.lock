@@ -527,7 +527,7 @@ wheels = [
 ]
 
 [[package]]
-name = "sphinxcontrib-jinjadomain"
+name = "sphinxcontrib-jinja"
 version = "0.6.0"
 source = { editable = "." }
 dependencies = [

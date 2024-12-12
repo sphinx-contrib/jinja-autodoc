@@ -1,15 +1,15 @@
-.. module:: sphinxcontrib.jinjadomain
+.. module:: sphinxcontrib.jinja
 
 Documenting jinja templates
 ===========================
 
-This contrib extension, :mod:`sphinxcontrib.jinjadomain`, provides a Sphinx
+This contrib extension, :mod:`sphinxcontrib.jinja`, provides a Sphinx
 domain for describing jinja templates.
 
-In order to use it, add :mod:`sphinxcontrib.jinjadomain` into
+In order to use it, add :mod:`sphinxcontrib.jinja` into
 :data:`extensions` list of your Sphinx configuration file (:file:`conf.py`)::
 
-    extensions = ['sphinxcontrib.jinjadomain']
+    extensions = ['sphinxcontrib.jinja']
 
 Basic usage
 -----------
@@ -101,22 +101,23 @@ will be rendered as:
 Author and License
 ------------------
 
-The :mod:`sphinxcontrib.jinjadomain` and :mod:`sphinxcontrib.autojinja`,
-parts of :mod:`sphinxcontrib`, are written by `Jaka Hudoklin`_ and maintained
+The :mod:`sphinxcontrib.jinja` and :mod:`sphinxcontrib.autojinja`,
+parts of :mod:`sphinxcontrib`, was originally written by `Jaka Hudoklin`_,
+and then `forked <https://github.com/offlinehacker/sphinxcontrib.jinjadomain>`__ and maintained
 by `Yaal Coop`_ and distributed under BSD license.
 
 The source code is mantained under `the common repository of contributed
-extensions for Sphinx`__ (find the :file:`jinjadomain` directory inside
+extensions for Sphinx`__ (find the :file:`jinja` directory inside
 the repository).
 
 .. sourcecode:: console
 
-   $ git clone git://github.com/offlinehacker/sphinxcontrib.jinjadomain.git
-   $ cd jinjadomain
+   $ git clone git://github.com/azmeuk/sphinxcontrib.jinja.git
+   $ cd jinja
    $ python setup.py install
 
-This package is also avalible on PyPI as `sphinxcontrib-jinjadomain`
+This package is also avalible on PyPI as `sphinxcontrib-jinja`
 
 .. _Jaka Hudoklin: http://www.offlinehacker.net/
 .. _Yaal Coop: https://yaal.coop
-__ https://github.com/offlinehacker/sphinxcontrib.jinjadomain
+__ https://github.com/azmeuk/sphinxcontrib.jinja

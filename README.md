@@ -1,7 +1,7 @@
-sphinxcontrib.jinjadomain --- Documenting jinja templates
-==========================================================
+sphinxcontrib.jinja --- Documenting jinja templates
+===================================================
 
-This contrib extension, sphinxcontrib.jinjadomain, provides a Sphinx domain
+This contrib extension, sphinxcontrib.jinja, provides a Sphinx domain
 for describing jinja templates.
 
-You can find documentation on following url http://packages.python.org/sphinxcontrib-jinjadomain/
+Have a look at the [documentation](https://sphinxcontrib-jinja.readthedocs.io)
