@@ -1,6 +1,7 @@
 import datetime
 import os
 import sys
+from importlib import metadata
 
 sys.path.insert(0, os.path.abspath(".."))
 sys.path.insert(0, os.path.abspath("../sphinxcontrib"))
@@ -22,8 +23,8 @@ master_doc = "index"
 project = "sphinxcontrib-jinja"
 year = datetime.datetime.now().strftime("%Y")
 copyright = f"{year}, Jaka Hudoklin"
-version = "0.6"
-release = "0.6.0"
+version = metadata.version(project)
+release = metadata.version(project)
 language = "en"
 exclude_patterns = ["_build"]
 pygments_style = "sphinx"
