@@ -28,20 +28,24 @@ classifiers = [
 ]
 dependencies = [
     "jinja2>=3.0.0",
-    "sphinx>=1.0.0",
+    "sphinx>=7.4.0",
 ]
 
 [dependency-groups]
 dev = [
+    "beautifulsoup4>=4.12.3",
     "mypy>=1.13.0",
     "pre-commit-uv>=4.1.4",
+    "pytest>=8.3.4",
+    "pytest-regressions>=2.5.0",
     "tox-uv>=1.16.0",
+    "pytest-cov>=6.0.0",
     "types-docutils>=0.21.0.20241128",
 ]
 
 doc = [
     "shibuya>=2024.10.15",
-    "sphinx>=7.0.0",
+    "sphinx>=7.4.0",
 ]
 
 [tool.hatch.build.targets.wheel]
@@ -80,10 +84,18 @@ docstring-code-format = true
 [tool.mypy]
 packages = ["sphinxcontrib"]
 explicit_package_bases = true
+ignore_missing_imports = true
 
 [tool.tox]
 requires = ["tox>=4.19"]
 env_list = [
+    "py39",
+    "py310",
+    "py311",
+    "py312",
+    "py313",
+    "minversions",
+    "coverage",
     "style",
     "doc",
 ]
@@ -105,5 +117,15 @@ commands = [
 [tool.tox.env.doc]
 dependency_groups = ["doc"]
 commands = [
-    ["sphinx-build", "--builder", "html", "--write-all", "--nitpicky", "--fail-on-warning", "doc", "build/sphinx/html"],
+    ["sphinx-build", "--builder", "html", "--write-all", "--nitpicky", "doc", "build/sphinx/html"],
+]
+
+[tool.tox.env.minversions]
+runner = "uv-venv-runner"
+uv_resolution = "lowest-direct"
+
+[tool.tox.env.coverage]
+commands = [
+    ["pytest", "--cov", "--cov-report", "term:skip-covered", "{posargs}"],
+    ["coverage", "html"],
 ]

@@ -1,0 +1,13 @@
+import pytest
+from bs4 import BeautifulSoup
+
+from . import fmt
+
+
+@pytest.mark.sphinx("html", testroot="build")
+def test_jinja_directive_html(app, status, warning, file_regression):
+    app.builder.build_all()
+    html = (app.outdir / "jinja.html").read_text(encoding="utf8")
+    html = BeautifulSoup(html, "html.parser")
+    role = html.select("dl.jinja")[0].prettify(formatter=fmt)
+    file_regression.check(role, extension=".html")

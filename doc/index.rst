@@ -92,7 +92,7 @@ the following documentation:
 .. sourcecode:: rst
    :caption: templates_doc.rst
 
-   .. autojinja: sample_template.in
+   .. autojinja:: sample_template.in
 
 will be rendered as:
 
