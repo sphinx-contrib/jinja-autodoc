@@ -8,15 +8,12 @@ import os
 import re
 
 from docutils import nodes
-from docutils.statemachine import ViewList
-
-try:
-    from docutils.parsers.rst import Directive
-except ImportError:
-    from sphinx.util.compat import Directive
-
+from docutils.parsers.rst import Directive
+from docutils.statemachine import StringList
+from sphinx.application import Sphinx
 from sphinx.util.docstrings import prepare_docstring
 from sphinx.util.nodes import nested_parse_with_titles
+from sphinx.util.typing import ExtensionMetadata
 
 from sphinxcontrib import jinja
 
@@ -83,18 +80,19 @@ class AutojinjaDirective(Directive):
 
         yield ""
 
-    def run(self):
+    def run(self) -> list[nodes.Node]:
         node = nodes.section()
         node.document = self.state.document
-        result = ViewList()
+        result = StringList()
         for line in self.make_rst():
             result.append(line, "<autojinja>")
         nested_parse_with_titles(self.state, result, node)
         return node.children
 
 
-def setup(app):
+def setup(app: Sphinx) -> ExtensionMetadata:
     if not app.registry.has_domain("jinja"):
         jinja.setup(app)
     app.add_directive("autojinja", AutojinjaDirective)
-    app.add_config_value("jinja_template_path", "", None)
+    app.add_config_value("jinja_template_path", "", "")
+    return {}

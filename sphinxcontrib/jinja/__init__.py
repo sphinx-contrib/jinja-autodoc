@@ -10,11 +10,13 @@ import os
 import re
 
 from sphinx import addnodes
+from sphinx.application import Sphinx
 from sphinx.directives import ObjectDescription
 from sphinx.domains import Domain
 from sphinx.domains import Index
 from sphinx.domains import ObjType
 from sphinx.util.docfields import TypedField
+from sphinx.util.typing import ExtensionMetadata
 
 
 def jinja_resource_anchor(method, path):
@@ -109,7 +111,7 @@ class JinjaDomain(Domain):
     def routes(self):
         return dict((key, self.data[key]) for key in self.object_types)
 
-    def clear_doc(self, docname):
+    def clear_doc(self, docname: str):
         for routes in self.routes.values():
             for path, info in list(routes.items()):
                 if info[0] == docname:
@@ -122,5 +124,6 @@ class JinjaDomain(Domain):
                 yield (path, path, method, info[0], anchor, 1)
 
 
-def setup(app):
+def setup(app: Sphinx) -> ExtensionMetadata:
     app.add_domain(JinjaDomain)
+    return {}

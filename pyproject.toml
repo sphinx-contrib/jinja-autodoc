@@ -33,8 +33,10 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "mypy>=1.13.0",
     "pre-commit-uv>=4.1.4",
     "tox-uv>=1.16.0",
+    "types-docutils>=0.21.0.20241128",
 ]
 
 doc = [
@@ -74,6 +76,10 @@ force-single-line = true
 
 [tool.ruff.format]
 docstring-code-format = true
+
+[tool.mypy]
+packages = ["sphinxcontrib"]
+explicit_package_bases = true
 
 [tool.tox]
 requires = ["tox>=4.19"]
