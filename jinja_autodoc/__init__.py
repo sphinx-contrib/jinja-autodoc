@@ -10,5 +10,6 @@ def setup(app: Sphinx) -> ExtensionMetadata:
 
     app.add_directive("autojinja", AutojinjaDirective)
     app.add_config_value("jinja_template_path", "", "")
+    app.add_config_value("jinja_template_pattern", "", "")
 
     return {}

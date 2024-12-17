@@ -4,8 +4,10 @@
 :license: BSD, see LICENSE for details.
 """
 
+import itertools
 import os
 import re
+from typing import Optional
 
 from docutils import nodes
 from docutils.parsers.rst import Directive
@@ -24,7 +26,23 @@ def autojinja_directive(path, content):
     yield ""
 
 
-def parse_jinja_comment(path: str) -> str | None:
+def parse_templates(
+    path: str, filename_filter: Optional[str] = None
+) -> list[Optional[str]]:
+    if not os.path.isdir(path):
+        return [parse_jinja_comment(path)]
+
+    filepath_collections = [
+        os.path.join(dirpath, filename)
+        for dirpath, _, filenames in os.walk(path)
+        for filename in filenames
+        if (not filename_filter or re.match(filename_filter, filename))
+    ]
+    template_paths = itertools.chain(filepath_collections)
+    return [parse_jinja_comment(path) for path in template_paths]
+
+
+def parse_jinja_comment(path: str) -> Optional[str]:
     """Parse jinja comment.
 
     :param path: Path to jinja template
@@ -45,13 +63,17 @@ class AutojinjaDirective(Directive):
     def make_rst(self):
         env = self.state.document.settings.env
         path = self.arguments[0]
-        docstring = parse_jinja_comment(
-            os.path.join(env.config["jinja_template_path"], path)
+        raw_docstrings = parse_templates(
+            os.path.join(env.config["jinja_template_path"], path),
+            env.config["jinja_template_pattern"],
         )
-        docstring = prepare_docstring(docstring)
-        if docstring is not None and env.config["jinja_template_path"]:
-            yield from autojinja_directive(path, docstring)
-
+        docstrings = [
+            prepare_docstring(raw_docstring) for raw_docstring in raw_docstrings
+        ]
+        if env.config["jinja_template_path"]:
+            for docstring in docstrings:
+                if docstring is not None:
+                    yield from autojinja_directive(path, docstring)
         yield ""
 
     def run(self) -> list[nodes.Node]:

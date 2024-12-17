@@ -22,3 +22,23 @@ def test_several_comments(app, status, warning, file_regression):
     html = BeautifulSoup(html, "html.parser")
     role = html.select("dl.jinja")[0].prettify(formatter=fmt)
     file_regression.check(role, extension=".html")
+
+
+@pytest.mark.sphinx("html", testroot="autojinja")
+def test_templatedir(app, status, warning, file_regression):
+    """Test using autojinja on a directory."""
+    app.builder.build_all()
+    html = (app.outdir / "templatedir.html").read_text(encoding="utf8")
+    html = BeautifulSoup(html, "html.parser")
+    roles = "\n".join(role.prettify(formatter=fmt) for role in html.select("dl.jinja"))
+    file_regression.check(roles, extension=".html")
+
+
+@pytest.mark.sphinx("html", testroot="autojinja-pattern")
+def test_file_filter(app, status, warning, file_regression):
+    """Test using autojinja on a directory with a filename filter."""
+    app.builder.build_all()
+    html = (app.outdir / "index.html").read_text(encoding="utf8")
+    html = BeautifulSoup(html, "html.parser")
+    roles = "\n".join(role.prettify(formatter=fmt) for role in html.select("dl.jinja"))
+    file_regression.check(roles, extension=".html")

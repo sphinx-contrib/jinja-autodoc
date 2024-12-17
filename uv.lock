@@ -624,16 +624,16 @@ wheels = [
 
 [[package]]
 name = "pytest-regressions"
-version = "2.5.0"
+version = "2.6.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pytest" },
     { name = "pytest-datadir" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/33/c6/2b6088711d0a9d87b82a7e6ac84c6cb59aab3bf37778bb25645590a5729c/pytest-regressions-2.5.0.tar.gz", hash = "sha256:818c7884c1cff3babf89eebb02cbc27b307856b1985427c24d52cb812a106fd9", size = 113615 }
+sdist = { url = "https://files.pythonhosted.org/packages/ba/05/78acfdf571ce4000af9d735530094b7a3276652f9c98e93feecd186c1b80/pytest_regressions-2.6.0.tar.gz", hash = "sha256:e3dce521fac11199a2a91a1b8837974d708c7e8665b8c9668b3a721b556c8183", size = 116150 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0c/93/086651842707118284e93387355efc5cbbce28bace9265b450d67be55fd8/pytest_regressions-2.5.0-py3-none-any.whl", hash = "sha256:8c4e5c4037325fdb0825bc1fdcb75e17e03adf3407049f0cb704bb996d496255", size = 23844 },
+    { url = "https://files.pythonhosted.org/packages/93/b4/48edc97a835f0f9c8de5db0e1a4bc7e1ce1bb9050e269924c28f10ff0280/pytest_regressions-2.6.0-py3-none-any.whl", hash = "sha256:5c4a4763415f765770449190097a99b3a8a6ebf20b24e6d90a32da6644e5d041", size = 24347 },
 ]
 
 [[package]]

@@ -41,35 +41,11 @@ will be rendered as:
 
 .. _directives:
 
-Directives
-----------
 
-.. rst:directive:: .. jinja:template:: path
+Automatic documentation
+-----------------------
 
-   Describes an jinja template.
-
-
-.. _resource-fields:
-
-Resource Fields
----------------
-
-Inside HTTP resource description directives like :rst:dir:`get`,
-reStructuredText field lists with these fields are recognized and formatted
-nicely:
-
-``param``, ``parameter``, ``arg``, ``argument``
-   Description of URL parameter.
-
-.. module:: jinja_autodoc.autojinja
-
-Automatically documenting jinja templates
-=========================================
-
-autojinja
----------
-
-The :mod:`jinja_autodoc.autojinja` directive generates jinja reference documentation from a start comment in jinja template.
+The ``autojinja`` directive generates Jinja reference documentation from a start comment in jinja template.
 Basicly it just takes `docstring` between `{#` and `#}` and inserts it where you
 specified `autojinja` directive.
 
@@ -95,6 +71,28 @@ the following documentation:
 will be rendered as:
 
     .. autojinja:: sample_template.in
+
+If the path is a directory, all the templates inside this directory will be rendered.
+To restrict the discovery to a subset of files, you can use the ``jinja_template_pattern`` to set a pattern to recognize template filenames.
+
+.. sourcecode:: python
+
+   jinja_template_pattern = r"\.html$"
+
+Directives
+----------
+
+.. rst:directive:: .. jinja:template:: path
+
+   Describes an jinja template.
+
+.. rst:directive:: .. jinja:autojinja:: path
+
+   Reads the first comment of a file and dynamically builds a Jinja documentation.
+   If the path is a directory, the templates in the directory will be documented.
+
+.. _resource-fields:
+
 
 Author and License
 ==================

@@ -26,7 +26,6 @@ class JinjaResource(ObjectDescription):
             "parameter",
             label="Parameters",
             names=("param", "parameter", "arg", "argument"),
-            typerolename="obj",
             typenames=("paramtype", "type"),
         )
     ]
@@ -89,12 +88,9 @@ class JinjaDomain(Domain):
     name = "jinja"
     label = "jinja"
 
-    object_types = {"template": ObjType("template", "template", "obj")}
-
+    object_types = {"template": ObjType("template", "template")}
     directives = {"template": JinjaResource}
-
     initial_data = {"template": {}}  # path: (docname, synopsis)
-
     indices = [JinjaIndex]
 
     @property

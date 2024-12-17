@@ -1,0 +1,1 @@
+.. autojinja:: templatedir
