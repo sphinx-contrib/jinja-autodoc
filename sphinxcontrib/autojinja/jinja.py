@@ -19,10 +19,9 @@ from sphinxcontrib import jinja
 
 
 def jinja_directive(path, content):
-    if isinstance(content, str):
-        content = content.splitlines()
+    content = content.splitlines() if isinstance(content, str) else content
     yield ""
-    yield ".. jinja:template:: {path}".format(**locals())
+    yield f".. jinja:template:: {path}"
     yield ""
     for line in content:
         yield "   " + line

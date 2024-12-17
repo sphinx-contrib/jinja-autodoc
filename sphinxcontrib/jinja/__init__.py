@@ -48,15 +48,9 @@ class JinjaResource(ObjectDescription):
         signode["fullname"] = fullname
         return (fullname, self.method, sig)
 
-    def needs_arglist(self):
-        return False
-
     def add_target_and_index(self, name_cls, sig, signode):
         signode["ids"].append(jinja_resource_anchor(*name_cls[1:]))
         self.env.domaindata["jinja"][self.method][sig] = (self.env.docname, "")
-
-    def get_index_text(self, modname, name):
-        return ""
 
 
 class JinjaIndex(Index):
