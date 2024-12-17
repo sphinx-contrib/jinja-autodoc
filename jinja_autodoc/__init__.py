@@ -2,7 +2,7 @@ from sphinx.application import Sphinx
 from sphinx.util.typing import ExtensionMetadata
 
 from .autojinja import AutojinjaDirective
-from .jinjadomain import JinjaDomain
+from .domain import JinjaDomain
 
 
 def setup(app: Sphinx) -> ExtensionMetadata:

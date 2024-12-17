@@ -14,7 +14,7 @@ from sphinx.util.docstrings import prepare_docstring
 from sphinx.util.nodes import nested_parse_with_titles
 
 
-def jinja_directive(path, content):
+def autojinja_directive(path, content):
     content = content.splitlines() if isinstance(content, str) else content
     yield ""
     yield f".. jinja:template:: {path}"
@@ -24,16 +24,15 @@ def jinja_directive(path, content):
     yield ""
 
 
-def parse_jinja_comment(path):
+def parse_jinja_comment(path: str) -> str | None:
     """Parse jinja comment.
 
     :param path: Path to jinja template
-    :type path: str
     :returns: Jinja comment docstring
-    :rtype: str
     """
-    f = open(path)
-    contents = f.read()
+    with open(path) as fd:
+        contents = fd.read()
+
     res = re.match(r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE | re.DOTALL)
     return res.group(1) if res else None
 
@@ -51,7 +50,7 @@ class AutojinjaDirective(Directive):
         )
         docstring = prepare_docstring(docstring)
         if docstring is not None and env.config["jinja_template_path"]:
-            yield from jinja_directive(path, docstring)
+            yield from autojinja_directive(path, docstring)
 
         yield ""
 
