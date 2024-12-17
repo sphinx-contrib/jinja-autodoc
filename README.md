@@ -1,7 +1,6 @@
-sphinxcontrib.jinja --- Documenting jinja templates
-===================================================
+sphinx-autodoc --- Documenting jinja templates
+==============================================
 
-This contrib extension, sphinxcontrib.jinja, provides a Sphinx domain
-for describing jinja templates.
+Automatically document your Jinja templates with Sphinx.
 
-Have a look at the [documentation](https://sphinxcontrib-jinja.readthedocs.io)
+Have a look at the [documentation](https://sphinx-autodoc.readthedocs.io)
