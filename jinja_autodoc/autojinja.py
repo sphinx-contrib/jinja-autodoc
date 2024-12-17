@@ -1,4 +1,4 @@
-"""sphinxcontrib.autojinja.
+"""The autojinja directive.
 
 :copyright: Copyright 2012 by Jaka Hudoklin
 :license: BSD, see LICENSE for details.
@@ -10,12 +10,8 @@ import re
 from docutils import nodes
 from docutils.parsers.rst import Directive
 from docutils.statemachine import StringList
-from sphinx.application import Sphinx
 from sphinx.util.docstrings import prepare_docstring
 from sphinx.util.nodes import nested_parse_with_titles
-from sphinx.util.typing import ExtensionMetadata
-
-from sphinxcontrib import jinja
 
 
 def jinja_directive(path, content):
@@ -87,11 +83,3 @@ class AutojinjaDirective(Directive):
             result.append(line, "<autojinja>")
         nested_parse_with_titles(self.state, result, node)
         return node.children
-
-
-def setup(app: Sphinx) -> ExtensionMetadata:
-    if not app.registry.has_domain("jinja"):
-        jinja.setup(app)
-    app.add_directive("autojinja", AutojinjaDirective)
-    app.add_config_value("jinja_template_path", "", "")
-    return {}

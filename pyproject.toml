@@ -3,8 +3,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "sphinxcontrib.jinja"
-version = "0.6.0"
+name = "jinja_autodoc"
+version = "0.1.0"
 description = "Jinja domain for jinja templates"
 readme = "README.md"
 license = {text = "BSD License"}
@@ -49,7 +49,7 @@ doc = [
 ]
 
 [tool.hatch.build.targets.wheel]
-only-include = ["sphinxcontrib"]
+only-include = ["jinja_autodoc"]
 
 [tool.ruff.lint]
 select = [
@@ -82,8 +82,7 @@ force-single-line = true
 docstring-code-format = true
 
 [tool.mypy]
-packages = ["sphinxcontrib"]
-explicit_package_bases = true
+packages = ["jinja_autodoc"]
 ignore_missing_imports = true
 
 [tool.tox]

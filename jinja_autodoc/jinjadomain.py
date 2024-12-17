@@ -1,6 +1,4 @@
-"""sphinxcontrib.jinja.
-
-The jinja domain for documenting jinja templates.
+"""The jinja domain for documenting jinja templates.
 
 :copyright: Copyright 2012 by Jaka Hudoklin
 :license: BSD, see LICENSE for details.
@@ -10,13 +8,11 @@ import os
 import re
 
 from sphinx import addnodes
-from sphinx.application import Sphinx
 from sphinx.directives import ObjectDescription
 from sphinx.domains import Domain
 from sphinx.domains import Index
 from sphinx.domains import ObjType
 from sphinx.util.docfields import TypedField
-from sphinx.util.typing import ExtensionMetadata
 
 
 def jinja_resource_anchor(method, path):
@@ -116,8 +112,3 @@ class JinjaDomain(Domain):
             for path, info in list(routes.items()):
                 anchor = jinja_resource_anchor(method, path)
                 yield (path, path, method, info[0], anchor, 1)
-
-
-def setup(app: Sphinx) -> ExtensionMetadata:
-    app.add_domain(JinjaDomain)
-    return {}
