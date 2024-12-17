@@ -101,12 +101,6 @@ class JinjaDomain(Domain):
     def routes(self):
         return dict((key, self.data[key]) for key in self.object_types)
 
-    def clear_doc(self, docname: str):
-        for routes in self.routes.values():
-            for path, info in list(routes.items()):
-                if info[0] == docname:
-                    del routes[path]
-
     def get_objects(self):
         for method, routes in self.routes.items():
             for path, info in list(routes.items()):

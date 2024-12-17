@@ -35,33 +35,13 @@ def parse_jinja_comment(path):
     f = open(path)
     contents = f.read()
     res = re.match(r"\{\#-?(.+?)-?\#\}", contents, flags=re.MULTILINE | re.DOTALL)
-    if res:
-        return res.group(1)
-
-    return None
+    return res.group(1) if res else None
 
 
 class AutojinjaDirective(Directive):
     has_content = True
     required_arguments = 1
     option_spec = {}
-
-    @property
-    def endpoints(self):
-        try:
-            endpoints = re.split(r"\s*,\s*", self.options["endpoints"])
-        except KeyError:
-            # means 'endpoints' option was missing
-            return None
-        return frozenset(endpoints)
-
-    @property
-    def undoc_endpoints(self):
-        try:
-            endpoints = re.split(r"\s*,\s*", self.options["undoc-endpoints"])
-        except KeyError:
-            return frozenset()
-        return frozenset(endpoints)
 
     def make_rst(self):
         env = self.state.document.settings.env

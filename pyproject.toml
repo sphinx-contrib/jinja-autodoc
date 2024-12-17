@@ -125,6 +125,6 @@ uv_resolution = "lowest-direct"
 
 [tool.tox.env.coverage]
 commands = [
-    ["pytest", "--cov", "--cov-report", "term:skip-covered", "{posargs}"],
+    ["pytest", "--cov", "--cov-fail-under=100", "--cov-report", "term:skip-covered", "{posargs}"],
     ["coverage", "html"],
 ]

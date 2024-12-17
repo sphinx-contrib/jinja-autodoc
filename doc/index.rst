@@ -1,15 +1,15 @@
-.. module:: sphinxcontrib.jinja
+.. module:: jinja_autodoc.jinja
 
 Documenting jinja templates
 ===========================
 
-This contrib extension, :mod:`sphinxcontrib.jinja`, provides a Sphinx
+This contrib extension, :mod:`jinja_autodoc`, provides a Sphinx
 domain for describing jinja templates.
 
-In order to use it, add :mod:`sphinxcontrib.jinja` into
+In order to use it, add :mod:`jinja_autodoc` into
 :data:`extensions` list of your Sphinx configuration file (:file:`conf.py`)::
 
-    extensions = ['sphinxcontrib.jinja']
+    extensions = ['jinja_autodoc']
 
 Basic usage
 -----------
@@ -61,19 +61,17 @@ nicely:
 ``param``, ``parameter``, ``arg``, ``argument``
    Description of URL parameter.
 
-.. module:: sphinxcontrib.autojinja.jinja
+.. module:: jinja_autodoc.autojinja
 
 Automatically documenting jinja templates
 =========================================
 
-The :mod:`sphinxcontrib.autojinja.jinja` extension generates jinja reference documentation from a start comment in jinja template.
+autojinja
+---------
+
+The :mod:`jinja_autodoc.autojinja` directive generates jinja reference documentation from a start comment in jinja template.
 Basicly it just takes `docstring` between `{#` and `#}` and inserts it where you
 specified `autojinja` directive.
-
-In order to use it, add :mod:`sphinxcontrib.autojinja.jinja` into
-:data:`extensions` list of your Sphinx configuration (:file:`conf.py`) file::
-
-    extensions = ['sphinxcontrib.autojinja.jinja']
 
 To make everything work you also have to specify relative or absolute path
 to your templates. If this option is not specified templates won't be displayed
