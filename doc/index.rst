@@ -47,9 +47,9 @@ will be rendered as:
 Automatic documentation
 -----------------------
 
-The ``autojinja`` directive generates Jinja reference documentation from a start comment in jinja template.
+The ``autotemplate`` directive generates Jinja reference documentation from a start comment in jinja template.
 Basicly it just takes `docstring` between `{#` and `#}` and inserts it where you
-specified `autojinja` directive.
+specified `autotemplate` directive.
 
 To make everything work you also have to specify relative or absolute path
 to your templates. If this option is not specified templates won't be displayed
@@ -68,11 +68,11 @@ the following documentation:
 .. sourcecode:: rst
    :caption: templates_doc.rst
 
-   .. autojinja:: sample_template.in
+   .. autotemplate:: sample_template.in
 
 will be rendered as:
 
-    .. autojinja:: sample_template.in
+    .. autotemplate:: sample_template.in
 
 If the path is a directory, all the templates inside this directory will be rendered.
 To restrict the discovery to a subset of files, you can use the ``jinja_template_pattern`` to set a pattern to recognize template filenames.
@@ -88,7 +88,7 @@ Directives
 
    Describes an jinja template.
 
-.. rst:directive:: .. jinja:autojinja:: path
+.. rst:directive:: .. jinja:autotemplate:: path
 
    Reads the first comment of a file and dynamically builds a Jinja documentation.
    If the path is a directory, the templates in the directory will be documented.

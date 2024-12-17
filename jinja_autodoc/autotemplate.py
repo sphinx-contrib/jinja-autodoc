@@ -1,4 +1,4 @@
-"""The autojinja directive.
+"""The autotemplate directive.
 
 :copyright: Copyright 2012 by Jaka Hudoklin
 :license: BSD, see LICENSE for details.
@@ -16,7 +16,7 @@ from sphinx.util.docstrings import prepare_docstring
 from sphinx.util.nodes import nested_parse_with_titles
 
 
-def autojinja_directive(path, content):
+def autotemplate_directive(path, content):
     content = content.splitlines() if isinstance(content, str) else content
     yield ""
     yield f".. jinja:template:: {path}"
@@ -73,7 +73,7 @@ class AutojinjaDirective(Directive):
         if env.config["jinja_template_path"]:
             for docstring in docstrings:
                 if docstring is not None:
-                    yield from autojinja_directive(path, docstring)
+                    yield from autotemplate_directive(path, docstring)
         yield ""
 
     def run(self) -> list[nodes.Node]:
@@ -81,6 +81,6 @@ class AutojinjaDirective(Directive):
         node.document = self.state.document
         result = StringList()
         for line in self.make_rst():
-            result.append(line, "<autojinja>")
+            result.append(line, "<autotemplate>")
         nested_parse_with_titles(self.state, result, node)
         return node.children
