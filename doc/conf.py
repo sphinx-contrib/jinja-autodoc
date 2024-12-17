@@ -36,9 +36,19 @@ intersphinx_mapping = {
 # -- Options for HTML output ----------------------------------------------
 
 html_theme = "shibuya"
+html_baseurl = "https://sphinx-autodoc.readthedocs.io/"
 html_theme_options = {
     "page_layout": "compact",
+    "github_url": "https://github.com/yaal-coop/jinja-autodoc",
 }
+html_context = {
+    "source_type": "github",
+    "source_user": "yaal-coop",
+    "source_repo": "sphinx-autodoc",
+    "source_version": "main",
+    "source_docs_path": "/doc/",
+}
+
 htmlhelp_basename = "jinja-autodoc-doc"
 
 jinja_template_path = str(pathlib.Path(__file__).parent.resolve())

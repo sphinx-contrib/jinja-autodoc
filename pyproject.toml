@@ -31,6 +31,10 @@ dependencies = [
     "sphinx>=7.4.0",
 ]
 
+[project.urls]
+documentation = "https://jinja-autodoc.readthedocs.io"
+repository = "https://github.com/yaal-coop/jinja-autodoc"
+
 [dependency-groups]
 dev = [
     "beautifulsoup4>=4.12.3",
