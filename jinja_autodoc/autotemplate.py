@@ -26,11 +26,11 @@ def autotemplate_directive(path, content):
     yield ""
 
 
-def parse_templates(
+def parse_template_paths(
     path: str, filename_filter: Optional[str] = None
 ) -> list[Optional[str]]:
     if not os.path.isdir(path):
-        return [parse_jinja_comment(path)]
+        return [path]
 
     filepath_collections = [
         os.path.join(dirpath, filename)
@@ -38,8 +38,7 @@ def parse_templates(
         for filename in filenames
         if (not filename_filter or re.match(filename_filter, filename))
     ]
-    template_paths = itertools.chain(filepath_collections)
-    return [parse_jinja_comment(path) for path in template_paths]
+    return list(itertools.chain(filepath_collections))
 
 
 def parse_jinja_comment(path: str) -> Optional[str]:
@@ -63,12 +62,15 @@ class AutojinjaDirective(Directive):
     def make_rst(self):
         env = self.state.document.settings.env
         path = self.arguments[0]
-        raw_docstrings = parse_templates(
-            os.path.join(env.config["jinja_template_path"], path),
-            env.config["jinja_template_pattern"],
+        root_path = os.path.join(env.config["jinja_template_path"], path)
+        template_paths = parse_template_paths(
+            root_path, env.config["jinja_template_pattern"]
         )
+        raw_docstrings = [parse_jinja_comment(path) for path in template_paths]
         docstrings = [
-            prepare_docstring(raw_docstring) for raw_docstring in raw_docstrings
+            prepare_docstring(raw_docstring)
+            for raw_docstring in raw_docstrings
+            if raw_docstring is not None
         ]
         if env.config["jinja_template_path"]:
             for docstring in docstrings:
