@@ -6,6 +6,8 @@ Documenting jinja templates
 This contrib extension, :mod:`jinja_autodoc`, provides a Sphinx
 domain for describing jinja templates.
 
+This package is available on PyPI as `jinja-autodoc`.
+
 In order to use it, add :mod:`jinja_autodoc` into
 :data:`extensions` list of your Sphinx configuration file (:file:`conf.py`)::
 
@@ -97,23 +99,9 @@ Directives
 Author and License
 ==================
 
-The :mod:`sphinxcontrib.jinja` and :mod:`sphinxcontrib.autojinja`,
-parts of :mod:`sphinxcontrib`, was originally written by `Jaka Hudoklin`_,
+The project was originally written by `Jaka Hudoklin`_,
 and then `forked <https://github.com/offlinehacker/sphinxcontrib.jinjadomain>`__ and maintained
 by `Yaal Coop`_ and distributed under BSD license.
 
-The source code is mantained under `the common repository of contributed
-extensions for Sphinx`__ (find the :file:`jinja` directory inside
-the repository).
-
-.. sourcecode:: console
-
-   $ git clone git://github.com/azmeuk/sphinxcontrib.jinja.git
-   $ cd jinja
-   $ python setup.py install
-
-This package is also avalible on PyPI as `sphinxcontrib-jinja`
-
 .. _Jaka Hudoklin: http://www.offlinehacker.net/
 .. _Yaal Coop: https://yaal.coop
-__ https://github.com/azmeuk/sphinxcontrib.jinja

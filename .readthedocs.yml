@@ -1,0 +1,19 @@
+---
+version: 2
+sphinx:
+  configuration: doc/conf.py
+build:
+  os: "ubuntu-22.04"
+  apt_packages:
+    - libsasl2-dev
+    - libldap2-dev
+    - libssl-dev
+  tools:
+    python: "3.12"
+  jobs:
+    post_create_environment:
+      - pip install uv
+      - uv export --group doc --no-hashes --output-file requirements.txt
+    post_install:
+      - pip install .
+      - pip install --requirement requirements.txt
