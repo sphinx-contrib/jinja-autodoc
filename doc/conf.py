@@ -39,11 +39,11 @@ html_theme = "shibuya"
 html_baseurl = "https://sphinx-autodoc.readthedocs.io/"
 html_theme_options = {
     "page_layout": "compact",
-    "github_url": "https://github.com/yaal-coop/jinja-autodoc",
+    "github_url": "https://github.com/sphinx-contrib/jinja-autodoc",
 }
 html_context = {
     "source_type": "github",
-    "source_user": "yaal-coop",
+    "source_user": "sphinx-contrib",
     "source_repo": "sphinx-autodoc",
     "source_version": "main",
     "source_docs_path": "/doc/",

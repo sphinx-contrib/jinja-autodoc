@@ -33,7 +33,7 @@ dependencies = [
 
 [project.urls]
 documentation = "https://jinja-autodoc.readthedocs.io"
-repository = "https://github.com/yaal-coop/jinja-autodoc"
+repository = "https://github.com/sphinx-contrib/jinja-autodoc"
 
 [dependency-groups]
 dev = [
