@@ -35,7 +35,7 @@ def parse_template_paths(
     filepath_collections = [
         os.path.join(dirpath, filename)
         for dirpath, _, filenames in os.walk(path)
-        for filename in filenames
+        for filename in sorted(filenames)
         if (not filename_filter or re.match(filename_filter, filename))
     ]
     return list(itertools.chain(filepath_collections))
@@ -66,16 +66,17 @@ class AutojinjaDirective(Directive):
         template_paths = parse_template_paths(
             root_path, env.config["jinja_template_pattern"]
         )
-        raw_docstrings = [parse_jinja_comment(path) for path in template_paths]
-        docstrings = [
-            prepare_docstring(raw_docstring)
-            for raw_docstring in raw_docstrings
-            if raw_docstring is not None
-        ]
         if env.config["jinja_template_path"]:
-            for docstring in docstrings:
-                if docstring is not None:
-                    yield from autotemplate_directive(path, docstring)
+            for template_path in template_paths:
+                raw_docstring = parse_jinja_comment(template_path)
+                if raw_docstring is None:
+                    continue
+
+                docstring = prepare_docstring(raw_docstring)
+                if docstring is None:
+                    continue
+
+                yield from autotemplate_directive(template_path, docstring)
         yield ""
 
     def run(self) -> list[nodes.Node]:
