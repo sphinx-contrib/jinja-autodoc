@@ -68,6 +68,9 @@ class AutojinjaDirective(Directive):
         )
         if env.config["jinja_template_path"]:
             for template_path in template_paths:
+                relative_template_path = os.path.relpath(
+                    template_path, env.config["jinja_template_path"]
+                )
                 raw_docstring = parse_jinja_comment(template_path)
                 if raw_docstring is None:
                     continue
@@ -76,7 +79,7 @@ class AutojinjaDirective(Directive):
                 if docstring is None:
                     continue
 
-                yield from autotemplate_directive(template_path, docstring)
+                yield from autotemplate_directive(relative_template_path, docstring)
         yield ""
 
     def run(self) -> list[nodes.Node]:
