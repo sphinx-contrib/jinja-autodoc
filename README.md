@@ -1,5 +1,5 @@
-sphinx-autodoc
-==============
+jinja-autodoc
+=============
 
 Automatically document your Jinja templates with Sphinx.
 

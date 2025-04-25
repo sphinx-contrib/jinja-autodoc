@@ -36,7 +36,7 @@ intersphinx_mapping = {
 # -- Options for HTML output ----------------------------------------------
 
 html_theme = "shibuya"
-html_baseurl = "https://sphinx-autodoc.readthedocs.io/"
+html_baseurl = "https://jinja-autodoc.readthedocs.io/"
 html_theme_options = {
     "page_layout": "compact",
     "github_url": "https://github.com/sphinx-contrib/jinja-autodoc",
@@ -44,7 +44,7 @@ html_theme_options = {
 html_context = {
     "source_type": "github",
     "source_user": "sphinx-contrib",
-    "source_repo": "sphinx-autodoc",
+    "source_repo": "jinja-autodoc",
     "source_version": "main",
     "source_docs_path": "/doc/",
 }
