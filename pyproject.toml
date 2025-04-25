@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "jinja_autodoc"
-version = "0.1.3"
+version = "0.1.4"
 description = "Jinja domain for jinja templates"
 readme = "README.md"
 license = {text = "BSD License"}
