@@ -6,6 +6,8 @@
 
 import os
 import re
+from collections.abc import Set
+from typing import Any
 
 from sphinx import addnodes
 from sphinx.directives import ObjectDescription
@@ -102,3 +104,6 @@ class JinjaDomain(Domain):
             for path, info in list(routes.items()):
                 anchor = jinja_resource_anchor(method, path)
                 yield (path, path, method, info[0], anchor, 1)
+
+    def merge_domaindata(self, docnames: Set[str], otherdata: dict[str, Any]) -> None:
+        self.data["template"].update(**otherdata["template"])
