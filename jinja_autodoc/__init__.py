@@ -1,3 +1,5 @@
+import importlib
+
 from sphinx.application import Sphinx
 from sphinx.util.typing import ExtensionMetadata
 
@@ -12,4 +14,8 @@ def setup(app: Sphinx) -> ExtensionMetadata:
     app.add_config_value("jinja_template_path", "", "")
     app.add_config_value("jinja_template_pattern", "", "")
 
-    return {}
+    return {
+        "version": importlib.metadata.version("jinja-autodoc"),
+        "parallel_read_safe": True,
+        "parallel_write_safe": True,
+    }
