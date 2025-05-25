@@ -103,5 +103,5 @@ The project was originally written by `Jaka Hudoklin`_,
 and then `forked <https://github.com/offlinehacker/sphinxcontrib.jinjadomain>`__ and maintained
 by `Yaal Coop`_ and distributed under BSD license.
 
-.. _Jaka Hudoklin: http://www.offlinehacker.net/
+.. _Jaka Hudoklin: https://jakahudoklin.com
 .. _Yaal Coop: https://yaal.coop
