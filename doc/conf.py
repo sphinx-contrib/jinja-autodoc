@@ -1,6 +1,5 @@
 import datetime
 import os
-import pathlib
 import sys
 from importlib import metadata
 
@@ -51,4 +50,4 @@ html_context = {
 
 htmlhelp_basename = "jinja-autodoc-doc"
 
-jinja_template_path = str(pathlib.Path(__file__).parent.resolve())
+jinja_template_path = "."
