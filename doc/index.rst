@@ -88,6 +88,15 @@ To restrict the discovery to a subset of files, you can use the ``jinja_template
 
    jinja_template_pattern = r"\.html$"
 
+Documents are rebuilt when the templates they document are edited.
+
+.. versionadded:: 0.2
+
+   Editing a template used to leave the documentation untouched until the next
+   full rebuild. Note that templates being *added to* or *removed from* a
+   documented directory still go unnoticed, as Sphinx dependencies can only be
+   files. Such changes need a full rebuild, with ``sphinx-build --fresh-env``.
+
 Directives
 ----------
 
