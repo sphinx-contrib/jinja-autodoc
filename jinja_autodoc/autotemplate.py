@@ -12,8 +12,11 @@ from typing import Optional
 from docutils import nodes
 from docutils.parsers.rst import Directive
 from docutils.statemachine import StringList
+from sphinx.util import logging
 from sphinx.util.docstrings import prepare_docstring
 from sphinx.util.nodes import nested_parse_with_titles
+
+logger = logging.getLogger(__name__)
 
 
 def autotemplate_directive(path, content):
@@ -26,9 +29,7 @@ def autotemplate_directive(path, content):
     yield ""
 
 
-def parse_template_paths(
-    path: str, filename_filter: Optional[str] = None
-) -> list[Optional[str]]:
+def parse_template_paths(path: str, filename_filter: Optional[str] = None) -> list[str]:
     if not os.path.isdir(path):
         return [path]
 
@@ -61,25 +62,35 @@ class AutojinjaDirective(Directive):
 
     def make_rst(self):
         env = self.state.document.settings.env
-        path = self.arguments[0]
-        root_path = os.path.join(env.config["jinja_template_path"], path)
+        template_root = env.config["jinja_template_path"]
+        if not template_root:
+            yield ""
+            return
+
+        root_path = os.path.join(template_root, self.arguments[0])
         template_paths = parse_template_paths(
             root_path, env.config["jinja_template_pattern"]
         )
-        if env.config["jinja_template_path"]:
-            for template_path in template_paths:
-                relative_template_path = os.path.relpath(
-                    template_path, env.config["jinja_template_path"]
+        for template_path in template_paths:
+            if not os.path.isfile(template_path):
+                logger.warning(
+                    "Template %s does not exist.",
+                    template_path,
+                    location=(env.docname, self.lineno),
+                    type="jinja-autodoc",
+                    subtype="missing-template",
                 )
-                raw_docstring = parse_jinja_comment(template_path)
-                if raw_docstring is None:
-                    continue
+                continue
 
-                docstring = prepare_docstring(raw_docstring)
-                if docstring is None:
-                    continue
+            env.note_dependency(template_path)
 
-                yield from autotemplate_directive(relative_template_path, docstring)
+            raw_docstring = parse_jinja_comment(template_path)
+            if raw_docstring is None:
+                continue
+
+            docstring = prepare_docstring(raw_docstring)
+            relative_template_path = os.path.relpath(template_path, template_root)
+            yield from autotemplate_directive(relative_template_path, docstring)
         yield ""
 
     def run(self) -> list[nodes.Node]:
