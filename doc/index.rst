@@ -51,11 +51,18 @@ The ``autotemplate`` directive generates Jinja reference documentation from a st
 Basicly it just takes `docstring` between `{#` and `#}` and inserts it where you
 specified `autotemplate` directive.
 
-To make everything work you also have to specify relative or absolute path
-to your templates. If this option is not specified templates won't be displayed
+To make everything work you also have to specify the path to your templates,
+either absolute, or relative to the directory containing your :file:`conf.py`
+file. If this option is not specified templates won't be displayed
 in your documentation.
 You can do this by setting `jinja_template_path` in your Sphinx configuration
 (:file:`conf.py`) file.
+
+.. versionchanged:: 0.2
+
+   Relative paths used to be resolved against the directory ``sphinx-build`` was
+   launched from. They are now resolved against the directory containing
+   :file:`conf.py`, like the other Sphinx path options.
 
 For example, considering this template:
 
