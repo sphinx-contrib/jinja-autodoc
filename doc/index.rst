@@ -115,8 +115,37 @@ HTML templates. If your templates are written in another language, set
 
 .. versionadded:: 0.2
 
-Directives
-----------
+Cross-references
+----------------
+
+The ``jinja:template`` role links to a documented template, from anywhere in the
+documentation:
+
+.. sourcecode:: rst
+
+   The registration process sends the :jinja:template:`emails/welcome.html` template.
+
+will be rendered as:
+
+    The registration process sends the :jinja:template:`emails/welcome.html` template.
+
+As in the other Sphinx domains, a leading ``~`` shortens the displayed text down
+to the template file name, and an explicit title can be given:
+
+.. sourcecode:: rst
+
+   :jinja:template:`~emails/welcome.html`
+   :jinja:template:`the welcome email <emails/welcome.html>`
+
+Targets are the paths the templates are documented with, and are matched exactly.
+The :rst:role:`any` role resolves them too, and so does
+:mod:`sphinx.ext.intersphinx`, which makes the templates documented by a project
+referenceable from another one.
+
+.. versionadded:: 0.2
+
+Directives and roles
+--------------------
 
 .. rst:directive:: .. jinja:template:: path
 
@@ -126,6 +155,10 @@ Directives
 
    Reads the first comment of a file and dynamically builds a Jinja documentation.
    If the path is a directory, the templates in the directory will be documented.
+
+.. rst:role:: jinja:template
+
+   Links to a template described by the :rst:dir:`jinja:template` directive.
 
 .. _resource-fields:
 
