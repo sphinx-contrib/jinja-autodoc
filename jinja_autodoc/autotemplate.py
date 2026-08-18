@@ -7,7 +7,6 @@
 import itertools
 import os
 import re
-from typing import Optional
 
 from docutils import nodes
 from docutils.parsers.rst import Directive
@@ -29,7 +28,7 @@ def autotemplate_directive(path, content):
     yield ""
 
 
-def parse_template_paths(path: str, filename_filter: Optional[str] = None) -> list[str]:
+def parse_template_paths(path: str, filename_filter: str | None = None) -> list[str]:
     if not os.path.isdir(path):
         return [path]
 
@@ -42,7 +41,7 @@ def parse_template_paths(path: str, filename_filter: Optional[str] = None) -> li
     return list(itertools.chain(filepath_collections))
 
 
-def parse_jinja_comment(path: str) -> Optional[str]:
+def parse_jinja_comment(path: str) -> str | None:
     """Parse jinja comment.
 
     :param path: Path to jinja template
