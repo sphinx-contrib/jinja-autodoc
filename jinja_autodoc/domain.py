@@ -47,7 +47,7 @@ class JinjaResource(ObjectDescription):
 
     def add_target_and_index(self, name_cls, sig, signode):
         signode["ids"].append(jinja_resource_anchor(*name_cls[1:]))
-        self.env.domaindata["jinja"][self.method][sig] = (self.env.docname, "")
+        self.env.domaindata["jinja"][self.method][sig] = (self.env.docname, "", None)
 
 
 class JinjaIndex(Index):
@@ -92,7 +92,7 @@ class JinjaDomain(Domain):
 
     object_types = {"template": ObjType("template", "template")}
     directives = {"template": JinjaResource}
-    initial_data = {"template": {}}  # path: (docname, synopsis)
+    initial_data = {"template": {}}  # path: (docname, synopsis, source)
     indices = [JinjaIndex]
 
     @property

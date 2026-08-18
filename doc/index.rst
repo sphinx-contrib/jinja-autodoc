@@ -21,25 +21,25 @@ jinja templates.
 
 .. sourcecode:: rst
 
-   .. jinja:template:: /etc/network/interfaces
+   .. jinja:template:: emails/welcome.html
 
-      Template for network config
+      Welcome email, sent after a registration
 
-      :param hostname: your computer's hostname
-      :type hostname: str
-      :param ip: your computer's ip
-      :type ip: str
+      :param user: the user to greet
+      :type user: User
+      :param login_url: where the user can log in
+      :type login_url: str
 
 will be rendered as:
 
-.. jinja:template:: /etc/network/interfaces
+.. jinja:template:: emails/welcome.html
 
-  Template for network config
+  Welcome email, sent after a registration
 
-  :param hostname: your computer's hostname
-  :type hostname: str
-  :param ip: your computer's ip
-  :type ip: str
+  :param user: the user to greet
+  :type user: User
+  :param login_url: where the user can log in
+  :type login_url: str
 
 .. _directives:
 
@@ -96,6 +96,24 @@ Documents are rebuilt when the templates they document are edited.
    full rebuild. Note that templates being *added to* or *removed from* a
    documented directory still go unnoticed, as Sphinx dependencies can only be
    files. Such changes need a full rebuild, with ``sphinx-build --fresh-env``.
+
+Template sources
+----------------
+
+Documented templates get a ``[source]`` link, pointing at a page that displays
+their highlighted source, the way :mod:`sphinx.ext.viewcode` does for python
+modules. Only templates living inside ``jinja_template_path`` get such a page.
+
+Templates are highlighted with the ``html+jinja`` Pygments lexer, which fits
+HTML templates. If your templates are written in another language, set
+``jinja_template_lexer`` to another `Pygments lexer
+<https://pygments.org/languages/>`__:
+
+.. sourcecode:: python
+
+   jinja_template_lexer = "jinja"
+
+.. versionadded:: 0.2
 
 Directives
 ----------
