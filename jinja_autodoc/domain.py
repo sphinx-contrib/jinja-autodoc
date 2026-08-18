@@ -9,12 +9,17 @@ import re
 from collections.abc import Set
 from typing import Any
 
+from docutils import nodes
 from sphinx import addnodes
+from sphinx.builders import Builder
 from sphinx.directives import ObjectDescription
 from sphinx.domains import Domain
 from sphinx.domains import Index
 from sphinx.domains import ObjType
+from sphinx.environment import BuildEnvironment
+from sphinx.roles import XRefRole
 from sphinx.util.docfields import TypedField
+from sphinx.util.nodes import make_refnode
 
 
 def jinja_resource_anchor(method, path):
@@ -48,6 +53,24 @@ class JinjaResource(ObjectDescription):
     def add_target_and_index(self, name_cls, sig, signode):
         signode["ids"].append(jinja_resource_anchor(*name_cls[1:]))
         self.env.domaindata["jinja"][self.method][sig] = (self.env.docname, "", None)
+
+
+class JinjaXRefRole(XRefRole):
+    """Cross-reference role targetting the path of a documented template."""
+
+    def process_link(
+        self,
+        env: BuildEnvironment,
+        refnode: nodes.Element,
+        has_explicit_title: bool,
+        title: str,
+        target: str,
+    ) -> tuple[str, str]:
+        """Let a leading ``~`` shorten the title down to the template file name."""
+        if not has_explicit_title and title.startswith("~"):
+            title = title.removeprefix("~").rpartition("/")[2]
+            target = target.removeprefix("~")
+        return title, target
 
 
 class JinjaIndex(Index):
@@ -92,6 +115,7 @@ class JinjaDomain(Domain):
 
     object_types = {"template": ObjType("template", "template")}
     directives = {"template": JinjaResource}
+    roles = {"template": JinjaXRefRole()}
     initial_data = {"template": {}}  # path: (docname, synopsis, source)
     indices = [JinjaIndex]
 
@@ -112,3 +136,34 @@ class JinjaDomain(Domain):
 
     def merge_domaindata(self, docnames: Set[str], otherdata: dict[str, Any]) -> None:
         self.data["template"].update(**otherdata["template"])
+
+    def resolve_xref(
+        self,
+        env: BuildEnvironment,
+        fromdocname: str,
+        builder: Builder,
+        typ: str,
+        target: str,
+        node: addnodes.pending_xref,
+        contnode: nodes.Element,
+    ) -> nodes.reference | None:
+        if target not in self.data["template"]:
+            return None
+
+        docname = self.data["template"][target][0]
+        anchor = jinja_resource_anchor(typ, target)
+        return make_refnode(builder, fromdocname, docname, anchor, contnode, target)
+
+    def resolve_any_xref(
+        self,
+        env: BuildEnvironment,
+        fromdocname: str,
+        builder: Builder,
+        target: str,
+        node: addnodes.pending_xref,
+        contnode: nodes.Element,
+    ) -> list[tuple[str, nodes.reference]]:
+        refnode = self.resolve_xref(
+            env, fromdocname, builder, "template", target, node, contnode
+        )
+        return [] if refnode is None else [("jinja:template", refnode)]

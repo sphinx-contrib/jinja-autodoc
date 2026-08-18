@@ -89,7 +89,10 @@ class AutojinjaDirective(Directive):
 
             docstring = prepare_docstring(raw_docstring)
             relative_template_path = os.path.relpath(template_path, template_root)
-            yield from autotemplate_directive(relative_template_path, docstring)
+            # Signatures name templates in the domain data, in the HTML anchors and
+            # in the source page names: keep them independent of the platform.
+            signature = relative_template_path.replace(os.sep, "/")
+            yield from autotemplate_directive(signature, docstring)
         yield ""
 
     def run(self) -> list[nodes.Node]:

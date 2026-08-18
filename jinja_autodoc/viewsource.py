@@ -49,7 +49,7 @@ def is_supported_builder(builder: Builder) -> bool:
 
 def source_page_name(sig: str) -> str:
     """Return the name of the page displaying the source of a template."""
-    return posixpath.join(OUTPUT_DIRNAME, *sig.split(os.sep))
+    return posixpath.join(OUTPUT_DIRNAME, sig)
 
 
 def template_source_path(root: str, sig: str) -> str | None:
