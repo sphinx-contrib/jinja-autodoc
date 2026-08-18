@@ -1,0 +1,4 @@
+Second
+======
+
+.. autotemplate:: second.html
