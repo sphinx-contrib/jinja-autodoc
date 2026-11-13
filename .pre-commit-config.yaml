@@ -1,13 +1,13 @@
 ---
 repos:
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: 'v0.16.3'
+    rev: 'ef6cf06c079dd6b299dfc720b0f14400c9d168e1'  # frozen: v0.17.5
     hooks:
       - id: ruff
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v6.0.0
+    rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
     hooks:
       - id: fix-byte-order-marker
       - id: trailing-whitespace
@@ -16,7 +16,7 @@ repos:
         exclude: "\\.svg$|\\.map$|\\.min\\.css$|\\.min\\.js$|\\.po$|\\.pot$"
       - id: check-toml
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v2.3.1
+    rev: ad26ebfa797fcb9b8f83275937c1c1d6e126719c  # frozen: v2.4.1
     hooks:
       - id: mypy
         args: [--config-file, pyproject.toml]
@@ -25,6 +25,6 @@ repos:
           - sphinx
           - types-docutils
   - repo: https://github.com/rtts/djhtml
-    rev: 3.0.11
+    rev: 8577ec017145d76a0b954ebb7cb3169d4303014c  # frozen: 3.0.11
     hooks:
       - id: djhtml
